@@ -24,9 +24,10 @@ cap.framerate = 20
 rawCapture = PiRGBArray(cap, size=(640, 480))
 time.sleep(1)
 import RPi.GPIO as GPIO
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(21,GPIO.OUT)
+GPIO.setup(21, GPIO.OUT)
 
 
 class AppWindow(QDialog):
@@ -106,6 +107,7 @@ class AppWindow(QDialog):
                 face = cv2.cvtColor(self.face, cv2.COLOR_BGR2GRAY)
                 face = cv2.resize(face, (64, 64))
                 _, sure = self.face_recog.predict(face)
+                print(sure)
                 cv2.putText(frame, str(int(sure)), (x, y), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 2)
                 if sure < 900:
                     print('open relay')
