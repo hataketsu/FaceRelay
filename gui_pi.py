@@ -135,6 +135,8 @@ class AppWindow(QDialog):
         is_running = False
 
     def retrain(self):
+        if len(os.listdir(FACES_DIR)) == 0:
+            return
         self.is_training = True
         self.face_recog = cv2.face.EigenFaceRecognizer_create(30)
         imgs = []
